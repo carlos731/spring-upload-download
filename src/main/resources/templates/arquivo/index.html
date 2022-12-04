@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--Configuração-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    	integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    	crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+  		<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+  		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Imagens</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Gerenciamento de Imagens</p>
+                    <form id="uploadForm" method="post" th:action="@{/files/upload}" enctype="multipart/form-data" style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
+      					<input id="input-file" type="file" name="file" />
+      					<button class="btn btn-sm btn-outline-success" type="submit">
+        					SALVAR
+      					</button>
+   					</form>
+                </div>
+            </div>
+        </header>
+   		
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5" th:each="file : ${files}">
+                        <div class="card h-100"><!--th:each="file : ${files}"-->
+                            <!-- Arquivo image-->
+                            <img class="card-img-top" th:src="@{${file.url}}" style="width: 450; height: 300;" alt="..." />
+                            <!-- Arquivo details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Nome do arquivo-->
+                                    <a th:href="@{${file.url}}">
+                                    	<h5 class="fw-bolder">[[${file.name}]]</h5>
+                                	</a>
+                                </div>
+                            </div>
+                            <!-- Arquivo actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent justify-content-center text-center">
+                                <a style="color: blue;" th:href="@{${file.url}}" id="btnDownload"
+               						title="Delete this file" class="fa-solid fa-download icon-dark btn-download">
+               					</a>
+                                <a style="color: red;" th:href="@{'/files/delete/' + ${file.name}}" th:fileName="${file.name}" id="btnDelete"
+               					 	title="Delete this file" class="fa-regular fa-trash-can icon-dark btn-delete">
+               					</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <!--
+		<footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+        </footer>
+        -->
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
